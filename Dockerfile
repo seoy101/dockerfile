@@ -56,15 +56,12 @@ RUN apt-get update && \
   libc-bin \
   llvm \
   libconfig-dev \
-  ncurses-dev \
-  zlib1g-dev \
   yum \
   libX11-dev libXpm-dev libXft-dev libXext-dev \
   asciidoc
 
 #---------------------------------JAVA-------------------------------------------------------------------------------------#  
 # upgrade java
-RUN apt-get install -y python-software-properties 
 RUN  apt-get install -y software-properties-common 
 RUN \
   echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | debconf-set-selections && \
@@ -100,6 +97,11 @@ RUN chmod -R 777 /usr/local/pipeline
 RUN chown -R pipeman:ngsgroup /usr/local/pipeline
 
 #---------------------------------------------------------------------
+#------------------------------Add exe----------------------------------
+ADD bwa /exe
+ADD picard.jar /exe
+
+
 #Cleanup the temp dir
 RUN rm -rvf /tmp/*
 
